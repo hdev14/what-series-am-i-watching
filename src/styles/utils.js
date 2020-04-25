@@ -4,8 +4,11 @@ export const Tag = styled.div`
 	background-color: var(--wsiw-yellow);
 	border-radius: 16px;
 	color: black;
-	margin-right: 5px;
+	margin: 5px;
+	margin-left: 0;
 	padding: 6px 24px;
+	text-align: center;
+	width: 120px;
 `;
 
 export const Status = styled.div`

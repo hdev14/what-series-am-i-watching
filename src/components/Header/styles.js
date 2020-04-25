@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 export const HeaderContainer = styled.div`
 	background-color: var(--wsiw-grey-medium);
 	padding: 10px 0;
+	position: sticky;
+	top: 0;
+	left: 0;
 
 	nav {
 		display: flex;
