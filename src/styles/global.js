@@ -2,9 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600&display=swap');
-
 :root {
+
+	font-size: 16px;
+
 	/* colors */
 	--wsiw-grey-intense: #1D2937;
 	--wsiw-grey-medium: #2A3949;
@@ -37,6 +38,9 @@ body {
 	font-family: 'Josefin Sans', sans-serif;
 }
 
+button {
+	cursor: pointer;
+}
 #root { display: none; }
 
 @media only screen and (max-width: 600px) {
