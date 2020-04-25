@@ -1,9 +1,16 @@
 import React from 'react';
 
+import Routes from './routes';
+
 import GlobalStyle from './styles/global';
 
 function App() {
-  return <h1>Hellow</h1>;
+  return (
+  	<>
+  		<Routes />
+  		<GlobalStyle />
+  	</>
+  );
 }
 
 export default App;
