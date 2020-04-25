@@ -1,13 +1,13 @@
 import React from 'react';
 import { RiPencilLine } from 'react-icons/ri';
 
-import { Tag } from '../../styles/utils';
 import {
 	SeriesInfoContainer,
 	Banner,
 	SeriesInfoContent,
 	Status,
-	ButtonEdit
+	ButtonEdit,
+	Tag
 } from './styles';
 
 export default function SeriesInfo() {
@@ -28,8 +28,6 @@ export default function SeriesInfo() {
 				<h1>Mr. Robot</h1>
 
 				<div id="tags">
-					<Tag>drama</Tag>
-					<Tag>drama</Tag>
 					<Tag>drama</Tag>
 					<Tag>drama</Tag>
 				</div>

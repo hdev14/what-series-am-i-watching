@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Status as StatusUtils } from '../../styles/utils';
+import { Status as StatusUtils, Tag as TagUtils } from '../../styles/utils';
 
 export const SeriesInfoContainer = styled.div`
 	display: flex;
@@ -32,6 +32,11 @@ export const SeriesInfoContent = styled.div`
 	flex: 1;
 	padding: 30px;
 
+	h1 {
+		text-transform: uppercase;
+		font-size: 1.5rem;
+	}
+
 	div#tags {
 		display: flex;
 		flex-wrap: wrap;
@@ -43,6 +48,10 @@ export const Status = styled(StatusUtils)`
 	left: 0;
 	position: sticky;
 	width: 100%;
+`;
+
+export const Tag = styled(TagUtils)`
+	background-color: var(--wsiw-grey-normal);
 `;
 
 export const ButtonEdit = styled.button`
