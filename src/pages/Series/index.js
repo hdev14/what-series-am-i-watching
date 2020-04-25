@@ -2,11 +2,13 @@ import React from 'react';
 
 import EmptyCard from '../../components/EmptyCard';
 
+import { SeriesContainer } from './styles';
+
 export default function Series() {
 	return (
-		<div>
+		<SeriesContainer>
 			<h1>Series</h1>
 			<EmptyCard />
-		</div>
+		</SeriesContainer>
 	);
 }

@@ -41,9 +41,19 @@ body {
 button {
 	cursor: pointer;
 }
+
+#info {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 #root { display: none; }
 
 @media only screen and (max-width: 600px) {
+
+	#info { display: none; }
 
 	#root { display: block; }
 
