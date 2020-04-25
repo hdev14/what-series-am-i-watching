@@ -29,36 +29,9 @@ export const Card = styled.div`
 
 `;
 
-export const Tag = styled.div`
-	background-color: var(--wsiw-yellow);
-	border-radius: 16px;
-	color: black;
-	margin-right: 5px;
-	padding: 6px 24px;
-`;
-
 export const TagCircle = styled.div`
 	background-color: var(--wsiw-grey-intense);
 	border-radius: 16px;
 	color: var(--wsiw-yellow);
 	padding: 6px 12px;
-`;
-
-export const Status = styled.div`
-	background-color: ${props => {
-		switch(props.type) {
-			case 'to-watch':
-				return 'var(--wsiw-red)';
-			case 'assisted':
-				return 'var(--wsiw-yellow)';
-			default:
-				return 'var(--wsiw-green)';
-		}
-	}};
-
-	color: black;
-	padding: 5px 0;
-	text-align: center;
-	text-transform: uppercase;
-
 `;

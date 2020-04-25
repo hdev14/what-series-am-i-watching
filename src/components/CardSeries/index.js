@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Card, Tag, TagCircle, Status } from './styles';
+import { Tag, Status } from '../../styles/utils';
+import { Card, TagCircle } from './styles';
 
 export default function CardSeries() {
 
