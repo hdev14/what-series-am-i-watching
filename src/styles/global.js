@@ -38,6 +38,11 @@ body {
 	font-family: 'Josefin Sans', sans-serif;
 }
 
+input {
+	font-size: 1.1rem;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
 button {
 	cursor: pointer;
 }
