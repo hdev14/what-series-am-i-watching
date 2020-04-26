@@ -28,3 +28,17 @@ export const Status = styled.div`
 	text-align: center;
 	text-transform: uppercase;
 `;
+
+export const ButtonCreate = styled.button`
+	background-color: var(--wsiw-grey-medium);
+	border-radius: 50%;
+	border: none;
+	bottom: 30px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+	color: var(--wsiw-yellow);
+	height: 50px;
+	padding: 10px;
+	position: fixed;
+	right: 30px;
+	width: 50px;
+`;

@@ -1,11 +1,12 @@
 import React from 'react';
 import { FiPlus, FiTrash } from 'react-icons/fi';
 
+import { ButtonCreate } from '../../styles/utils';
+
 import {
 	GenresContainer,
 	GenreList,
 	ButtonDelete,
-	ButtonCreate
 } from './styles';
 
 export default function Genres() {
