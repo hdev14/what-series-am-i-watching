@@ -1,16 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Tag, Status } from '../../styles/utils';
 import { Card, TagCircle } from './styles';
 
-export default function CardSeries() {
+export default function CardSeries({ url }) {
 
 	const style = {
 		backgroundImage: "url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.__1JoNJMARGKhQ0xpTvdJgHaEK%26pid%3DApi&f=1')"
 	}
 
 	return (
-		<Card style={style}>
+		<Card to={url} style={style}>
 			<div id="tags">
 				<Tag>
 					drama
@@ -27,4 +28,8 @@ export default function CardSeries() {
 			</Status>
 		</Card>
 	);
+}
+
+CardSeries.propTypes = {
+	url: PropTypes.string
 }
