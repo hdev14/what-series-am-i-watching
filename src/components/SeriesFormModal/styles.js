@@ -11,6 +11,7 @@ export const Modal = styled.div`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	width: 300px;
+	color: var(--wsiw-grey-intense);
 
 	input {
 		border-radius: 2.5px;
@@ -25,6 +26,10 @@ export const Modal = styled.div`
 		border-top: 1px solid var(--wsiw-grey-normal);
 		margin-top: 20px;
 		padding-top: 20px;
+
+		label {
+			color: var(--wsiw-yellow);
+		}
 	}
 
 	div#options {
