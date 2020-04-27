@@ -34,7 +34,7 @@ export default function SeriesFormModal({ data = {}, show, toogleShow, edit = fa
 				}
 
 				<div id="select">
-					<label forHtml="genre">Genres</label>
+					<label>Genres</label>
 					<SelectGenres
 						defaultData={initialData.genres}
 						data={[{ value: 'drama', label: 'drama'}]}

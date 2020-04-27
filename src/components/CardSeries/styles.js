@@ -16,6 +16,7 @@ export const Card = styled(Link)`
 	position: relative;
 	text-decoration: none;
 
+	margin-bottom: 20px;
 	div#tags {
 		align-items: center;
 		align-self: flex-end;
@@ -28,6 +29,7 @@ export const Card = styled(Link)`
 		margin-bottom: 10px;
 		margin-left: 20px;
 		text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
+		text-transform: capitalize;
 	}
 
 `;

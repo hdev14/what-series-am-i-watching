@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiPlus } from 'react-icons/fi';
+
+import api from '../../services/api';
 
 import EmptyCard from '../../components/EmptyCard';
 import CardSeries from '../../components/CardSeries';
@@ -9,7 +11,20 @@ import { ButtonCreate } from '../../styles/utils';
 import { SeriesContainer } from './styles';
 
 export default function Series() {
+	const [series, setSeries] = useState([]);
 	const [showModal, setShowModal] = useState(false);
+
+	useEffect(() => {
+		async function fecthSeries() {
+			const response = await api.get('/series');
+			console.log(response.data);
+			setSeries([... response.data]);
+
+		}
+
+		fecthSeries();
+
+	}, []);
 
 	function toogleModal(e) {
 		e.preventDefault();
@@ -19,8 +34,26 @@ export default function Series() {
 	return (
 		<SeriesContainer>
 			<h1>Series</h1>
-			{/* <EmptyCard /> */}
-			<CardSeries url="/series-info/1" />
+			{/* */}
+
+			{ series.lenght === 0
+				? <EmptyCard />
+				:
+				<>
+					{series.map(serie => (
+						<CardSeries
+							key={serie.id}
+							url={`/series-info/${serie.id}`}
+							data={{
+								genre: serie.genre,
+								name: serie.name,
+								background: serie.background,
+								status: serie.status
+							}} />
+					))}
+				</>
+			}
+
 
 			<ButtonCreate onClick={toogleModal}>
 				<FiPlus size={25} />
