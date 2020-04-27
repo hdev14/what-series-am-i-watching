@@ -20,7 +20,7 @@ export default function Series() {
 		<SeriesContainer>
 			<h1>Series</h1>
 			{/* <EmptyCard /> */}
-			<CardSeries />
+			<CardSeries url="/series-info/1" />
 
 			<ButtonCreate onClick={toogleModal}>
 				<FiPlus size={25} />

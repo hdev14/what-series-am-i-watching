@@ -9,6 +9,7 @@ export const Tag = styled.div`
 	padding: 6px 24px;
 	text-align: center;
 	width: 120px;
+	text-transform: lowercase;
 `;
 
 export const Status = styled.div`

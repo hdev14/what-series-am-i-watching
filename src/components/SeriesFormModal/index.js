@@ -6,7 +6,7 @@ import SelectGenres from '../SelectGenres';
 
 import { Modal } from './styles';
 
-export default function SeriesFormModal({ data = {}, show, toogleShow, edit = true }) {
+export default function SeriesFormModal({ data = {}, show, toogleShow, edit = false }) {
 	const [initialData, setInitialData] = useState({
 		name: data.name,
 		status: data.status,
