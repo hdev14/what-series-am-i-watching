@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
-export default function SelectGenres({ data, setData }) {
+export default function SelectGenres({ defaultData, data, setData }) {
 	return (
 		<Select
-			defaultValue={[]}
+			defaultValue={defaultData}
 			isMult
 			name="genres"
 			options={data}
@@ -15,6 +15,7 @@ export default function SelectGenres({ data, setData }) {
 }
 
 SelectGenres.propTypes = {
+	defaultData: PropTypes.arrayOf(PropTypes.string).isRequired,
 	data: PropTypes.arrayOf(PropTypes.string).isRequired,
 	setData: PropTypes.func.isRequired
 }
