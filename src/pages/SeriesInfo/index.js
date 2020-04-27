@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { RiPencilLine } from 'react-icons/ri';
+
+import api from '../../services/api';
 
 import {
 	SeriesInfoContainer,
@@ -10,34 +13,47 @@ import {
 	Tag
 } from './styles';
 
-export default function SeriesInfo() {
+export default function SeriesInfo({ match }) {
+	const [serie, setSerie] = useState({});
+
+	useEffect(() => {
+		async function fetchSerie() {
+			const response = await api.get(`/series/${match.params.id}`);
+
+			setSerie({ ... response.data });
+		}
+
+		fetchSerie();
+	}, []);
+
 	const style = {
-		backgroundImage: "url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.__1JoNJMARGKhQ0xpTvdJgHaEK%26pid%3DApi&f=1')"
+		backgroundImage: `url("${serie.background}")`
 	}
 
 	return (
 		<SeriesInfoContainer>
 			<Banner style={style}>
-				<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Og1IuZqhXzffOsLzKLkBhAHaLH%26pid%3DApi&f=1" />
+				<img src={serie.poster} title={serie.name} />
 			</Banner>
 			<SeriesInfoContent>
 				<ButtonEdit>
 					<RiPencilLine size={25} />
 				</ButtonEdit>
 
-				<h1>Mr. Robot</h1>
+				<h1>{serie.name}</h1>
 
 				<div id="tags">
-					<Tag>drama</Tag>
-					<Tag>drama</Tag>
+					<Tag>{serie.genre}</Tag>
 				</div>
 
-				<p>
-					Mussum Ipsum, cacilds vidis litro abertis. Quem num gosta di mé, boa gentis num é. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Pra lá , depois divoltis porris, paradis.
-				</p>
+				<p>{serie.comments}</p>
 			</SeriesInfoContent>
 
-			<Status type="to-watch">to watch</Status>
+			<Status type={serie.status}>{serie.status && serie.status.replace('-', ' ')}</Status>
 		</SeriesInfoContainer>
 	);
+}
+
+SeriesInfo.propTypes = {
+	match: PropTypes.object.isRequired
 }
