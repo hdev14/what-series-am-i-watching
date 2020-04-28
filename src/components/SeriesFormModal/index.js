@@ -6,15 +6,39 @@ import SelectGenres from '../SelectGenres';
 
 import { Modal } from './styles';
 
-export default function SeriesFormModal({ data = {}, show, toogleShow, edit = false }) {
-	const [initialData, setInitialData] = useState({
-		name: data.name,
-		status: data.status,
-		genres: data.genres
-	});
+export default function SeriesFormModal({ data, show, toggleShow, edit = false }) {
+
+	const [initialData, setInitialData] = useState(data);
+
+	function setName(e) {
+		const { value } = e.target;
+
+		setInitialData({
+			...initialData,
+			name: value
+		});
+	}
+
+	function setStatus(e) {
+		const { value } = e.target;
+
+		setInitialData({
+			...initialData,
+			status: value
+		});
+	}
+
+	function setGenre(e) {
+		const { value } = e.target;
+
+		setInitialData({
+			...initialData,
+			status: value
+		});
+	}
 
 	const options = [
-		{ value: 'to-watch', label: 'to watch' },
+		{ value: 'to-watch', label: 'to-watch' },
 		{ value: 'watching', label: 'watching' },
 		{ value: 'assisted', label: 'assisted' }
 	];
@@ -22,7 +46,11 @@ export default function SeriesFormModal({ data = {}, show, toogleShow, edit = fa
 	return (
 		<Modal show={show}>
 			<form>
-				<input type="text" placeholder="name" />
+				<input
+					type="text"
+					placeholder="name"
+					value={initialData.name}
+					onChange={setName}/>
 
 				{ edit &&
 					<Select
@@ -30,19 +58,20 @@ export default function SeriesFormModal({ data = {}, show, toogleShow, edit = fa
 						className="basic-single"
 						classNamePrefix="select"
 						defaultValue={initialData.status}
-						options={options} />
+						options={options}
+						onChange={setStatus} />
 				}
 
 				<div id="select">
-					<label>Genres</label>
+					<label>Genre</label>
 					<SelectGenres
-						defaultData={initialData.genres}
-						data={[{ value: 'drama', label: 'drama'}]}
-						setData={() => {}} />
+						defaultData={initialData.genre}
+						data={initialData.genres}
+						setData={setGenre} />
 				</div>
 
 				<div id="options">
-					<button id="close" onClick={toogleShow}>fechar</button>
+					<button id="close" onClick={toggleShow}>fechar</button>
 					<button id="save">salvar</button>
 				</div>
 			</form>
@@ -51,8 +80,8 @@ export default function SeriesFormModal({ data = {}, show, toogleShow, edit = fa
 }
 
 SeriesFormModal.propTypes = {
-	data: PropTypes.object,
+	data: PropTypes.object.isRequired,
 	show: PropTypes.bool.isRequired,
-	toogleShow: PropTypes.func.isRequired,
+	toggleShow: PropTypes.func.isRequired,
 	edit: PropTypes.bool
 };

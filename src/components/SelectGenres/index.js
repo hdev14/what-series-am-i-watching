@@ -6,7 +6,6 @@ export default function SelectGenres({ defaultData = [], data, setData }) {
 	return (
 		<Select
 			defaultValue={defaultData}
-			isMult
 			name="genres"
 			options={data}
 			className="basic-multi-select"

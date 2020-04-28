@@ -12,6 +12,7 @@ export const Modal = styled.div`
 	transform: translate(-50%, -50%);
 	width: 300px;
 	color: var(--wsiw-grey-intense);
+	z-index: 10;
 
 	input {
 		border-radius: 2.5px;

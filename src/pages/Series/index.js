@@ -17,8 +17,7 @@ export default function Series() {
 	useEffect(() => {
 		async function fecthSeries() {
 			const response = await api.get('/series');
-			console.log(response.data);
-			setSeries([... response.data]);
+			setSeries(response.data);
 
 		}
 
@@ -26,7 +25,7 @@ export default function Series() {
 
 	}, []);
 
-	function toogleModal(e) {
+	function toggleModal(e) {
 		e.preventDefault();
 		setShowModal(!showModal);
 	}
@@ -55,11 +54,11 @@ export default function Series() {
 			}
 
 
-			<ButtonCreate onClick={toogleModal}>
+			<ButtonCreate onClick={toggleModal}>
 				<FiPlus size={25} />
 			</ButtonCreate>
 
-			<SeriesFormModal show={showModal} toogleShow={toogleModal} />
+			<SeriesFormModal show={showModal} toggleShow={toggleModal} />
 		</SeriesContainer>
 	);
 }

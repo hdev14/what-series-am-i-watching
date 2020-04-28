@@ -4,6 +4,8 @@ import { RiPencilLine } from 'react-icons/ri';
 
 import api from '../../services/api';
 
+import SeriesFormModal from '../../components/SeriesFormModal';
+
 import {
 	SeriesInfoContainer,
 	Banner,
@@ -15,16 +17,31 @@ import {
 
 export default function SeriesInfo({ match }) {
 	const [serie, setSerie] = useState({});
+	const [genres, setGenres] = useState([]);
+	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
-		async function fetchSerie() {
-			const response = await api.get(`/series/${match.params.id}`);
+		async function fetchDatas() {
+			const responseSerie = await api.get(`/series/${match.params.id}`);
+			setSerie(responseSerie.data);
 
-			setSerie({ ... response.data });
+
+			const responseGenres = await api.get(`/genres`);
+			const genresData = responseGenres.data.map(genre => ({
+				value: genre.id,
+				label: genre.name
+			}));
+
+			setGenres(genresData);
 		}
 
-		fetchSerie();
-	}, []);
+		fetchDatas();
+	}, [match]);
+
+	function toggleModal(e) {
+		e.preventDefault();
+		setShowModal(!showModal);
+	}
 
 	const style = {
 		backgroundImage: `url("${serie.background}")`
@@ -33,10 +50,10 @@ export default function SeriesInfo({ match }) {
 	return (
 		<SeriesInfoContainer>
 			<Banner style={style}>
-				<img src={serie.poster} title={serie.name} />
+				<img src={serie.poster} alt={serie.name} />
 			</Banner>
 			<SeriesInfoContent>
-				<ButtonEdit>
+				<ButtonEdit onClick={toggleModal}>
 					<RiPencilLine size={25} />
 				</ButtonEdit>
 
@@ -48,6 +65,16 @@ export default function SeriesInfo({ match }) {
 
 				<p>{serie.comments}</p>
 			</SeriesInfoContent>
+
+			<SeriesFormModal
+				edit={true}
+				show={showModal}
+				toggleShow={toggleModal}
+				data={{
+					...serie,
+					genre: serie.genre,
+					genres: genres
+				}} />
 
 			<Status type={serie.status}>{serie.status && serie.status.replace('-', ' ')}</Status>
 		</SeriesInfoContainer>

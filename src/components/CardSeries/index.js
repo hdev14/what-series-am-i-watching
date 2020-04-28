@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Tag, Status } from '../../styles/utils';
-import { Card, TagCircle } from './styles';
+import { Card } from './styles';
 
 export default function CardSeries({ url, data }) {
 
