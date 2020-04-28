@@ -1,4 +1,4 @@
 # **What Series am I Watching?**
 
-É um gerenciador de séries para que você saiba quais exatamente está asssitindo.
+Small frontend based on this simple [API.](https://github.com/HermersonDev/minhas-series-server)
 
