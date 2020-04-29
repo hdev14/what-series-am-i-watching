@@ -24,6 +24,9 @@ export const Back = styled(Link)`
 
 export const Brand = styled.span`
 	font-size: 1.5rem;
+	flex: 1;
+	text-align: center;
+	margin-left: 10%;
 `;
 
 export const Option = styled.ul`

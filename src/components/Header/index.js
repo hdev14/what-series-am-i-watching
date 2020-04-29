@@ -6,13 +6,12 @@ import { FaBars, FaChevronLeft } from 'react-icons/fa';
 
 import {
 	HeaderContainer,
-	Back,
 	Brand,
 	Option,
 	ButtonOption
 }  from './styles';
 
-export default function Header({ back = '', series = false, genres = false }) {
+export default function Header() {
 	const [collapsed, setCollapsed] = useState(false);
 
 	function toogleOption() {
@@ -22,10 +21,6 @@ export default function Header({ back = '', series = false, genres = false }) {
 	return (
 		<HeaderContainer>
 			<nav>
-				<Back to={back}>
-					<FaChevronLeft size={25} />
-				</Back>
-
 				<Brand>WSIW?</Brand>
 
 				<ButtonOption onClick={toogleOption}>
@@ -42,10 +37,4 @@ export default function Header({ back = '', series = false, genres = false }) {
 			</Option>
 		</HeaderContainer>
 	);
-}
-
-Header.propTypes = {
-	back: PropTypes.string,
-	series: PropTypes.bool,
-	genres: PropTypes.bool
 }
