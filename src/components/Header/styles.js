@@ -7,6 +7,7 @@ export const HeaderContainer = styled.div`
 	position: sticky;
 	top: 0;
 	left: 0;
+	z-index: 20;
 
 	nav {
 		display: flex;
