@@ -1,78 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
-
-import SelectGenres from '../SelectGenres';
 
 import { Modal } from './styles';
 
-export default function SeriesFormModal({ data, show, toggleShow, edit = false }) {
-
-	const [initialData, setInitialData] = useState(data);
-
-	function setName(e) {
-		const { value } = e.target;
-
-		setInitialData({
-			...initialData,
-			name: value
-		});
-	}
-
-	function setStatus(e) {
-		const { value } = e.target;
-
-		setInitialData({
-			...initialData,
-			status: value
-		});
-	}
-
-	function setGenre(e) {
-		const { value } = e.target;
-
-		setInitialData({
-			...initialData,
-			status: value
-		});
-	}
-
-	const options = [
-		{ value: 'to-watch', label: 'to-watch' },
-		{ value: 'watching', label: 'watching' },
-		{ value: 'assisted', label: 'assisted' }
-	];
+export default function SeriesFormModal({
+	children,
+	show,
+	toggleShow,
+	handleSaveData
+}) {
 
 	return (
 		<Modal show={show}>
 			<form>
-				<input
-					type="text"
-					placeholder="name"
-					value={initialData.name}
-					onChange={setName}/>
 
-				{ edit &&
-					<Select
-						name="status"
-						className="basic-single"
-						classNamePrefix="select"
-						defaultValue={initialData.status}
-						options={options}
-						onChange={setStatus} />
-				}
-
-				<div id="select">
-					<label>Genre</label>
-					<SelectGenres
-						defaultData={initialData.genre}
-						data={initialData.genres}
-						setData={setGenre} />
-				</div>
+				{children}
 
 				<div id="options">
-					<button id="close" onClick={toggleShow}>fechar</button>
-					<button id="save">salvar</button>
+					<button id="close" onClick={toggleShow}>close</button>
+					<button id="save" onClick={handleSaveData}>save</button>
 				</div>
 			</form>
 		</Modal>
@@ -80,8 +26,11 @@ export default function SeriesFormModal({ data, show, toggleShow, edit = false }
 }
 
 SeriesFormModal.propTypes = {
-	data: PropTypes.object.isRequired,
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node
+	]).isRequired,
 	show: PropTypes.bool.isRequired,
 	toggleShow: PropTypes.func.isRequired,
-	edit: PropTypes.bool
+	handleSaveData: PropTypes.func.isRequired
 };

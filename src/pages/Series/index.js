@@ -6,25 +6,40 @@ import api from '../../services/api';
 import EmptyCard from '../../components/EmptyCard';
 import CardSeries from '../../components/CardSeries';
 import SeriesFormModal from '../../components/SeriesFormModal';
+import SelectGenres from '../../components/SelectGenres';
 
 import { ButtonCreate } from '../../styles/utils';
 import { SeriesContainer } from './styles';
 
 export default function Series() {
-	const [series, setSeries] = useState([]);
-	const [showModal, setShowModal] = useState(false);
 
+	const [series, setSeries] = useState([]);
+	const [genres, setGenres] = useState([]);
 	useEffect(() => {
-		async function fecthSeries() {
+		async function fecthData() {
 			const response = await api.get('/series');
 			setSeries(response.data);
 
+			const responseGenres = await api.get(`/genres`);
+			const genresData = responseGenres.data.map(genre => ({
+				value: genre.id,
+				label: genre.name
+			}));
+
+			setGenres(genresData);
 		}
 
-		fecthSeries();
-
+		fecthData();
 	}, []);
 
+	const [newSerie, setNewSerie] = useState({});
+	async function handleSaveSerie(e) {
+		e.preventDefault();
+		const response = await api.post('/series', { ...newSerie, status: 'to-watch' });
+		window.location.reload();
+	}
+
+	const [showModal, setShowModal] = useState(false);
 	function toggleModal(e) {
 		e.preventDefault();
 		setShowModal(!showModal);
@@ -33,12 +48,10 @@ export default function Series() {
 	return (
 		<SeriesContainer>
 			<h1>Series</h1>
-			{/* */}
 
 			{ series.lenght === 0
-				? <EmptyCard />
-				:
-				<>
+				? <EmptyCard onClick={toggleModal}/>
+				: <>
 					{series.map(serie => (
 						<CardSeries
 							key={serie.id}
@@ -58,7 +71,29 @@ export default function Series() {
 				<FiPlus size={25} />
 			</ButtonCreate>
 
-			<SeriesFormModal show={showModal} toggleShow={toggleModal} />
+			<SeriesFormModal
+				show={showModal}
+				toggleShow={toggleModal}
+				handleSaveData={handleSaveSerie} >
+
+				<input
+					type="text"
+					placeholder="name"
+					value={newSerie.name}
+					onChange={(e) => {
+						setNewSerie({ ...newSerie, name: e.target.value });
+					}} />
+
+				<div id="select">
+					<label>Genre</label>
+					<SelectGenres
+						data={genres}
+						setData={(item) => {
+							setNewSerie({ ...newSerie, genre_id: item.value });
+						}} />
+				</div>
+
+			</SeriesFormModal>
 		</SeriesContainer>
 	);
 }

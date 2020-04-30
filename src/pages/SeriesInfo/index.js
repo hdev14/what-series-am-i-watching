@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
 import { RiPencilLine } from 'react-icons/ri';
 
 import api from '../../services/api';
 
 import SeriesFormModal from '../../components/SeriesFormModal';
+import SelectGenres from '../../components/SelectGenres';
 
 import {
 	SeriesInfoContainer,
@@ -16,15 +18,13 @@ import {
 } from './styles';
 
 export default function SeriesInfo({ match }) {
+
 	const [serie, setSerie] = useState({});
 	const [genres, setGenres] = useState([]);
-	const [showModal, setShowModal] = useState(false);
-
 	useEffect(() => {
 		async function fetchDatas() {
 			const responseSerie = await api.get(`/series/${match.params.id}`);
 			setSerie(responseSerie.data);
-
 
 			const responseGenres = await api.get(`/genres`);
 			const genresData = responseGenres.data.map(genre => ({
@@ -38,6 +38,19 @@ export default function SeriesInfo({ match }) {
 		fetchDatas();
 	}, [match]);
 
+	async function handleSaveSerie(e) {
+		e.preventDefault();
+		const response = await api.put(`/series/${serie.id}`, {
+			id: serie.id,
+			name: serie.name,
+			comments: serie.comments,
+			status: serie.status,
+			genre_id: serie.genre_id,
+		});
+		console.log(response.data);
+	}
+
+	const [showModal, setShowModal] = useState(false);
 	function toggleModal(e) {
 		e.preventDefault();
 		setShowModal(!showModal);
@@ -47,11 +60,18 @@ export default function SeriesInfo({ match }) {
 		backgroundImage: `url("${serie.background}")`
 	}
 
+	const statusOptions = [
+		{ value: 'to-watch', label: 'to-watch' },
+		{ value: 'watching', label: 'watching' },
+		{ value: 'assisted', label: 'assisted' }
+	];
+
 	return (
 		<SeriesInfoContainer>
 			<Banner style={style}>
 				<img src={serie.poster} alt={serie.name} />
 			</Banner>
+
 			<SeriesInfoContent>
 				<ButtonEdit onClick={toggleModal}>
 					<RiPencilLine size={25} />
@@ -67,16 +87,43 @@ export default function SeriesInfo({ match }) {
 			</SeriesInfoContent>
 
 			<SeriesFormModal
-				edit={true}
 				show={showModal}
 				toggleShow={toggleModal}
-				data={{
-					...serie,
-					genre: serie.genre,
-					genres: genres
-				}} />
+				handleSaveData={handleSaveSerie} >
+				<input
+					type="text"
+					placeholder="name"
+					value={serie.name}
+					onChange={(e) => {
+						setSerie({
+							...serie,
+							name: e.target.value
+						});
+					}} />
 
-			<Status type={serie.status}>{serie.status && serie.status.replace('-', ' ')}</Status>
+				<Select
+					name="status"
+					className="basic-single"
+				  classNamePrefix="select"
+					options={statusOptions}
+					placeholder="Select status"
+					onChange={(item) => {
+						setSerie({ ...serie, status: item.value });
+					}} />
+
+				<div id="select">
+					<label>Genre</label>
+					<SelectGenres
+						data={genres}
+						setData={(item) => {
+							setSerie({ ...serie, genre_id: item.value });
+						}} />
+				</div>
+			</SeriesFormModal>
+
+			<Status type={serie.status}>
+				{serie.status && serie.status.replace('-', ' ')}
+			</Status>
 		</SeriesInfoContainer>
 	);
 }

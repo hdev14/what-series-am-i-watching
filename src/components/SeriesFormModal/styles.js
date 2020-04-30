@@ -7,7 +7,7 @@ export const Modal = styled.div`
 	box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
 	left: 50%;
 	padding: 30px 20px;
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	width: 300px;
