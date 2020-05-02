@@ -14,7 +14,7 @@ export const Modal = styled.div`
 	color: var(--wsiw-grey-intense);
 	z-index: 10;
 
-	input {
+	input, textarea {
 		border-radius: 2.5px;
 		border: none;
 		margin: 5px 0;
@@ -22,6 +22,12 @@ export const Modal = styled.div`
 		text-transform: capitalize;
 		width: 100%;
 	}
+
+	textarea {
+		width: 100%;
+		heigth: 100px;
+	}
+
 
 	div#select {
 		border-top: 1px solid var(--wsiw-grey-normal);

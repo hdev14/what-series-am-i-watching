@@ -47,7 +47,7 @@ export default function SeriesInfo({ match }) {
 			status: serie.status,
 			genre_id: serie.genre_id,
 		});
-		console.log(response.data);
+		window.location.reload();
 	}
 
 	const [showModal, setShowModal] = useState(false);
@@ -111,6 +111,16 @@ export default function SeriesInfo({ match }) {
 						setSerie({ ...serie, status: item.value });
 					}} />
 
+				<textarea
+					placeholder="comments"
+					value={serie.comments}
+					onChange={(e) => {
+						setSerie({
+							...serie,
+							comments: e.target.value
+						});
+					}} />
+
 				<div id="select">
 					<label>Genre</label>
 					<SelectGenres
@@ -119,6 +129,7 @@ export default function SeriesInfo({ match }) {
 							setSerie({ ...serie, genre_id: item.value });
 						}} />
 				</div>
+
 			</SeriesFormModal>
 
 			<Status type={serie.status}>

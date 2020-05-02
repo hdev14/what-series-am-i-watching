@@ -35,7 +35,7 @@ export default function Series() {
 	const [newSerie, setNewSerie] = useState({});
 	async function handleSaveSerie(e) {
 		e.preventDefault();
-		const response = await api.post('/series', { ...newSerie, status: 'to-watch' });
+		await api.post('/series', { ...newSerie, status: 'to-watch' });
 		window.location.reload();
 	}
 
@@ -82,6 +82,16 @@ export default function Series() {
 					value={newSerie.name}
 					onChange={(e) => {
 						setNewSerie({ ...newSerie, name: e.target.value });
+					}} />
+
+				<textarea
+					placeholder="comments"
+					value={newSerie.comments}
+					onChange={(e) => {
+						setNewSerie({
+							...newSerie,
+							comments: e.target.value
+						});
 					}} />
 
 				<div id="select">
