@@ -40,7 +40,7 @@ export default function SeriesInfo({ match }) {
 
 	async function handleSaveSerie(e) {
 		e.preventDefault();
-		const response = await api.put(`/series/${serie.id}`, {
+		await api.put(`/series/${serie.id}`, {
 			id: serie.id,
 			name: serie.name,
 			comments: serie.comments,
