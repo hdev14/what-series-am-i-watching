@@ -16,27 +16,28 @@ export default function Series() {
 	const [series, setSeries] = useState([]);
 	const [genres, setGenres] = useState([]);
 	useEffect(() => {
-		async function fecthData() {
-			const response = await api.get('/series');
-			setSeries(response.data);
-
-			const responseGenres = await api.get(`/genres`);
-			const genresData = responseGenres.data.map(genre => ({
-				value: genre.id,
-				label: genre.name
-			}));
-
-			setGenres(genresData);
-		}
-
 		fecthData();
 	}, []);
+
+	async function fecthData() {
+		const response = await api.get('/series');
+		setSeries(response.data);
+
+		const responseGenres = await api.get(`/genres`);
+		const genresData = responseGenres.data.map(genre => ({
+			value: genre.id,
+			label: genre.name
+		}));
+
+		setGenres(genresData);
+	}
 
 	const [newSerie, setNewSerie] = useState({});
 	async function handleSaveSerie(e) {
 		e.preventDefault();
 		await api.post('/series', { ...newSerie, status: 'to-watch' });
-		window.location.reload();
+		await fecthData();
+		setShowModal(!showModal);
 	}
 
 	const [showModal, setShowModal] = useState(false);
