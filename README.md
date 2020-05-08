@@ -1,14 +1,9 @@
 ### **What Series am I Watching?**
 
-Projeto com objetivos de estudar ReactJS.
+Projeto com objetivos de estudar ReactJS. Frontend para browser feito para ser usado com dispositivos pequenos.
 
-**Gifs**
+#### Screens
 
-<a href="https://i2.imgflip.com/3ztp9q">
-	<img src="https://i2.imgflip.com/3ztp9q.gif" width="200" />
-</a>
-
-<a href="https://i2.imgflip.com/3ztprz">
-	<img src="https://i2.imgflip.com/3ztprz.gif" width="200" />
-</a>
+![screen1](docs/screen1.gif)
+![screen2](docs/screen2.gif)
 
